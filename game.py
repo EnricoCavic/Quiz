@@ -46,8 +46,8 @@ while len(available_questions) > 0:
     print(question_key, current_question[question_key], sep=': ', end='\n\n')
 
     options = current_question[answers_key]
-    for i in range(0, len(options)):
-        print(f'{i}) {options[i]}')
+    for i, opt in enumerate(options):
+        print(f'{i})', opt)
     
     user_answer = input('Choose an option:')
     if current_question[correct_key] == options[int(user_answer)]:
