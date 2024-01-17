@@ -29,7 +29,6 @@ def load_questions():
     for element in inline_questions: 
         if element.startswith('#'): continue
         question, answers, correct = element.split('\n')
-
         questions.append(generate_question(
             question,
             answers.split(', '),
@@ -40,17 +39,18 @@ def load_questions():
 
 
 available_questions = load_questions()
+
 while len(available_questions) > 0:
     current_question = available_questions.pop()
-    key1, key2, key3 = current_question
-    print(key1, current_question[key1], sep=': ', end='\n\n')
+    question_key, answers_key, correct_key = current_question
+    print(question_key, current_question[question_key], sep=': ', end='\n\n')
 
-    options = current_question[key2]
+    options = current_question[answers_key]
     for i in range(0, len(options)):
         print(f'{i}) {options[i]}')
     
     user_answer = input('Choose an option:')
-    if current_question[key3] == options[int(user_answer)]:
+    if current_question[correct_key] == options[int(user_answer)]:
         print('Correct answer!', end='\n\n')
     else:
         print('Wrong answer!', end='\n\n')
