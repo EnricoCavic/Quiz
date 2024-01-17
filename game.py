@@ -5,7 +5,6 @@ def generate_question(question : str, options : list[str], correct : str):
         if opt == correct:
             correct_flag = True
             
-            
     if not correct_flag:
         print('There is no option matching the correct one!')
         return None
