@@ -6,6 +6,7 @@ def generate_question(question : str, options : list[str], correct : str):
         if opt == correct:
             correct_flag = True
             
+            
     if not correct_flag:
         print('There is no option matching the correct one!')
         return None
@@ -19,22 +20,29 @@ def generate_question(question : str, options : list[str], correct : str):
 def questions_from_file():
     PATH = 'questions.txt'
     ENCODING = 'utf-8'
+    TO_REMOVE = set(['', '\n'])
+
     with open(PATH, 'r', encoding=ENCODING) as file:
-        line_questions = file.read().split('\n\n')
+        raw_lines = file.read().split('\n\n')
+        inline_questions = [item for item in raw_lines if item not in TO_REMOVE]
 
-    questions = {}
-    for element in line_questions: 
+    questions = []
+    for element in inline_questions: 
         if element.startswith('#'): continue
-        split_question = line_questions.split('\n')
+        question, answers, correct = element.split('\n')
 
-    
+        questions.append(generate_question(
+            question,
+            answers.split(', '),
+            correct
+        ))
 
-    return line_questions
+    return questions
 
-    
-questions_from_file()
 
 questions = questions_from_file()
+
+print(questions)
 
 
 
